@@ -60,9 +60,9 @@ export default function Hero() {
           transition={{ delay: 1, duration: 1 }}
           className="font-display text-4xl tracking-[0.15em] text-warmwhite sm:text-5xl md:text-6xl"
         >
-          <span className="text-gold">R</span>oop
+          <span className="text-gold-shine">R</span>oop
           <span className="mx-4 text-gold/60 text-2xl md:text-3xl">&amp;</span>
-          <span className="text-gold">D</span>hvani
+          <span className="text-gold-shine">D</span>hvani
         </motion.h1>
 
         <motion.div

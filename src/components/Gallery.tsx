@@ -52,18 +52,19 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
-              className="group relative mb-6 block w-full break-inside-avoid border-[8px] border-warmwhite bg-warmwhite shadow-md transition-transform duration-300 hover:-translate-y-1 focus-visible:-translate-y-1"
+              className="group relative mb-6 block w-full break-inside-avoid overflow-hidden rounded-sm border-[8px] border-warmwhite bg-warmwhite shadow-md transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl focus-visible:-translate-y-1.5 focus-visible:shadow-xl"
             >
-              <span className="pointer-events-none absolute inset-0 border border-gold/40" />
+              <span className="pointer-events-none absolute inset-0 z-10 border border-gold/40 rounded-sm" />
               <img
                 src={p.src}
                 alt={p.caption}
                 loading="lazy"
-                className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <span className="absolute inset-x-0 bottom-0 translate-y-full bg-charcoal/80 p-3 text-left transition-transform duration-300 group-hover:translate-y-0">
-                <span className="font-label text-[0.6rem] tracking-[0.2em] text-gold-light">{p.caption}</span>
-              </span>
+              <div className="px-3 pb-3 pt-2 text-left">
+                <div className="mb-1.5 h-px w-6 bg-gold/40" />
+                <span className="font-label block text-[0.55rem] tracking-[0.25em] text-charcoal/60">{p.caption}</span>
+              </div>
             </motion.button>
           ))}
         </div>

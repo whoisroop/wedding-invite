@@ -35,7 +35,7 @@ export default function RSVP() {
           <div className="relative rounded-sm bg-warmwhite shadow-xl">
             <div className="relative flex h-56 items-end justify-center overflow-hidden p-6">
               {!open && (
-                <p className="font-display text-2xl text-charcoal/60 italic">Roop &amp; Dhvani request the pleasure...</p>
+                <p className="font-body text-2xl text-charcoal/60 italic">Roop &amp; Dhvani request the pleasure...</p>
               )}
             </div>
 

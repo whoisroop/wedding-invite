@@ -87,6 +87,64 @@ body {
 .font-body { font-family: var(--font-body); }
 .font-label { font-family: var(--font-label); }
 
+/* Button — elegant border-reveal on hover */
+.btn-reveal {
+  position: relative;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  color: var(--color-gold);
+  transition: color 0.3s;
+  border-radius: 9999px;
+}
+.btn-reveal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(201, 162, 39, 0.08);
+  border-radius: inherit;
+  transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.btn-reveal:hover::before {
+  opacity: 0;
+  transform: scale(0.5, 0.5);
+}
+.btn-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  border: 1px solid var(--color-gold);
+  border-radius: inherit;
+  transform: scale(1.15, 1.15);
+  transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.btn-reveal:hover::after {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.btn-reveal > span {
+  position: relative;
+  z-index: 2;
+}
+
+/* Metallic gold shine for R & D initials */
+.text-gold-shine {
+  background: linear-gradient(135deg, #C9A227 0%, #E0BE4F 25%, #FFE485 45%, #C9A227 55%, #A07E1A 70%, #E0BE4F 85%, #C9A227 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-shimmer 4s ease-in-out infinite;
+}
+
+@keyframes gold-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 @keyframes gold-pulse {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }

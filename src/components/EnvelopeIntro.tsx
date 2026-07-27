@@ -224,9 +224,9 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                   </div>
 
                   <h1 className="font-display text-3xl md:text-4xl text-maroon tracking-wide">
-                    <span className="text-gold">R</span>oop
+                    <span className="text-gold-shine">R</span>oop
                     <span className="mx-3 text-gold/40 text-xl">&amp;</span>
-                    <span className="text-gold">D</span>hvani
+                    <span className="text-gold-shine">D</span>hvani
                   </h1>
 
                   <div className="my-4 mx-auto h-px w-16 bg-gold/40" />
@@ -249,12 +249,11 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                   >
                     <motion.button
                       onClick={handleEnter}
-                      className="font-label group relative rounded-full border border-gold/50 px-8 py-3 text-[0.55rem] tracking-[0.35em] text-gold transition-all duration-500 hover:border-gold hover:text-gold-light cursor-pointer"
+                      className="btn-reveal font-label px-8 py-3 text-[0.55rem] tracking-[0.35em] cursor-pointer"
                       whileHover={{ scale: 1.04 }}
                       whileTap={{ scale: 0.97 }}
                     >
-                      <span className="absolute inset-0 rounded-full opacity-0 transition-all duration-500 group-hover:opacity-100" style={{ boxShadow: "0 0 30px 4px rgba(201,162,39,0.2), inset 0 0 20px 2px rgba(201,162,39,0.05)" }} />
-                      <span className="relative">ENTER THE CELEBRATION</span>
+                      <span>ENTER THE CELEBRATION</span>
                     </motion.button>
                     <p className="font-body mt-2 text-[0.6rem] tracking-[0.15em] text-charcoal-light/25">
                       Tap or Scroll
@@ -274,13 +273,11 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
               >
                 <motion.button
                   onClick={handleOpen}
-                  className="font-label group relative rounded-full border border-gold/50 px-10 py-4 text-xs tracking-[0.35em] text-gold transition-all duration-500 hover:border-gold hover:text-gold-light cursor-pointer"
+                  className="btn-reveal font-label px-10 py-4 text-xs tracking-[0.35em] cursor-pointer"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
-                  style={{ boxShadow: "0 0 0 0 rgba(201,162,39,0)" }}
                 >
-                  <span className="absolute inset-0 rounded-full opacity-0 transition-all duration-500 group-hover:opacity-100" style={{ boxShadow: "0 0 30px 4px rgba(201,162,39,0.2), inset 0 0 20px 2px rgba(201,162,39,0.05)" }} />
-                  <span className="relative">OPEN INVITATION</span>
+                  <span>OPEN INVITATION</span>
                 </motion.button>
                 <p className="font-body mt-3 text-xs tracking-[0.1em] text-charcoal-light/25">
                   Tap or Scroll
