@@ -13,11 +13,11 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
     if (interactedRef.current) return;
     interactedRef.current = true;
     setStage("opening");
-    setTimeout(() => setStage("revealed"), 1800);
+    setTimeout(() => setStage("revealed"), 2200);
     setTimeout(() => {
       setStage("exiting");
       setTimeout(onComplete, 1200);
-    }, 5000);
+    }, 5500);
   };
 
   const handleEnter = () => {
@@ -32,11 +32,11 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
       if (interactedRef.current) return;
       interactedRef.current = true;
       setStage("opening");
-      setTimeout(() => setStage("revealed"), 1800);
+      setTimeout(() => setStage("revealed"), 2200);
       setTimeout(() => {
         setStage("exiting");
         setTimeout(onComplete, 1200);
-      }, 5000);
+      }, 5500);
     };
     window.addEventListener("wheel", onScroll, { passive: true, once: true });
     window.addEventListener("touchmove", onScroll, { passive: true, once: true });
@@ -70,7 +70,6 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
             <div className="h-[60vh] w-[60vh] rounded-full bg-gold/10 blur-[140px]" />
           </div>
 
-          {/* Subtle linen texture */}
           <div className="linen-texture pointer-events-none absolute inset-0 opacity-30" />
 
           <div className="relative flex flex-col items-center" style={{ perspective: 1500 }}>
@@ -138,54 +137,62 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
 
                 {/* FLAP */}
                 <motion.div
-                  className="absolute inset-x-0 top-0 h-36 md:h-40 origin-top"
-                  style={{ clipPath: "polygon(0 0, 100% 0, 50% 85%)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}  
+                  className="absolute inset-x-0 top-0 origin-top z-20"
+                  style={{
+                    height: "100%",
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
+                  }}
                   animate={{ rotateX: stage !== "closed" ? 180 : 0 }}
-                  transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1], delay: stage !== "closed" ? 0.3 : 0 }}
+                    transition={{
+                      duration: 1.2,
+                      ease: [0.72, 0, 0.28, 1],
+                      delay: stage !== "closed" ? 0.7 : 0,
+                    }}
                 >
-                  {/* Flap background */}
-                  <div className="absolute inset-0 bg-maroon" />
-                  <div className="absolute inset-0 bg-gradient-to-b from-maroon-light/15 to-transparent" />
-
-                  {/* Flap gold border line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-gold/30" />
-
-                  {/* WAX SEAL — only visible when flap is closed */}
-                  {stage === "closed" && (
-                    <motion.button
-                      onClick={handleOpen}
-                      aria-label="Open invitation"
-                      className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 cursor-pointer"
-                      whileHover={{ scale: 1.08 }}
-                      whileTap={{ scale: 0.95 }}
-                      style={{ animation: "seal-glow 2.5s ease-in-out infinite" }}
-                    >
-                      <div className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full shadow-md" style={{ backgroundColor: "#EAE0D0" }}>
-                        <img
-                          src="/images/logo.png"
-                          alt=""
-                          className="h-9 w-auto object-contain md:h-10 drop-shadow-sm"
-                        />
-                      </div>
-                    </motion.button>
-                  )}
+                  <svg className="w-full h-full" viewBox="0 0 400 160" preserveAspectRatio="none">
+                    {/* Maroon V fill */}
+                    <path d="M0,0 L400,0 L200,108 Z" fill="#7A1F2A" />
+                    <path d="M0,0 L400,0 L200,108 Z" fill="url(#flapGrad)" opacity="0.15" />
+                    <defs>
+                      <linearGradient id="flapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#9A2F3A" />
+                        <stop offset="100%" stopColor="transparent" />
+                      </linearGradient>
+                    </defs>
+                    {/* Single thin gold V-line — constant 12-unit perpendicular inset from flap edge */}
+                    <path d="M58,18 L200,94 L342,18" fill="none" stroke="#C9A227" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.8" vectorEffect="non-scaling-stroke" />
+                  </svg>
                 </motion.div>
 
-                {/* Logo on envelope front (visible when flap opens) */}
+
+
+                {/* WAX SEAL — flex-centering avoids transform conflict with exit */}
                 <AnimatePresence>
-                  {(stage === "opening" || stage === "revealed") && (
+                  {stage === "closed" && (
                     <motion.div
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.8, ease: "easeOut" }}
-                      className="absolute top-[18%] left-1/2 -translate-x-1/2 z-10"
+                      key="wax-seal"
+                      className="absolute z-30 left-0 right-0 flex justify-center pointer-events-none"
+                      style={{ top: "39%" }}
+                      exit={{ opacity: 0, scale: 0.7, y: 8 }}
+                      transition={{ duration: 0.55, ease: "easeInOut" }}
                     >
-                      <img
-                        src="/images/logo.png"
-                        alt=""
-                        className="h-14 w-auto object-contain md:h-16 drop-shadow-md"
-                      />
+                      <motion.button
+                        onClick={handleOpen}
+                        disabled={stage !== "closed"}
+                        aria-label="Open invitation"
+                        className="outline-none focus:outline-none focus-visible:outline-none cursor-pointer flex items-center justify-center select-none pointer-events-auto"
+                        style={{ WebkitTapHighlightColor: "transparent" }}
+                        whileHover={stage === "closed" ? { scale: 1.06 } : {}}
+                        whileTap={stage === "closed" ? { scale: 0.95 } : {}}
+                      >
+                        <img
+                          src="/images/stamp-seal-transparent.png"
+                          alt=""
+                          className="h-20 w-auto md:h-24"
+                          style={{ filter: "drop-shadow(0 0 10px rgba(201,162,39,0.35))" }}
+                        />
+                      </motion.button>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -202,7 +209,6 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                   transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
                   className="absolute top-14 w-72 md:w-[360px] bg-warmwhite shadow-2xl border border-gold/30 p-10 md:p-12 text-center"
                 >
-                  {/* Card inner border */}
                   <div className="absolute inset-2 border border-gold/10 pointer-events-none" />
 
                   <span className="font-label text-[0.5rem] tracking-[0.5em] text-gold">
@@ -217,7 +223,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                     />
                   </div>
 
-                  <h1 className="font-display text-3xl md:text-4xl text-emerald tracking-wide">
+                  <h1 className="font-display text-3xl md:text-4xl text-maroon tracking-wide">
                     <span className="text-gold">R</span>oop
                     <span className="mx-3 text-gold/40 text-xl">&amp;</span>
                     <span className="text-gold">D</span>hvani
@@ -235,7 +241,6 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                     </p>
                   </div>
 
-                  {/* Enter prompt */}
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -244,14 +249,15 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                   >
                     <motion.button
                       onClick={handleEnter}
-                      className="font-label group relative rounded-full border border-gold/50 px-8 py-3 text-[0.55rem] tracking-[0.35em] text-gold transition-all duration-300 hover:shadow-[0_0_20px_rgba(201,162,39,0.25)] hover:border-gold hover:text-warmwhite hover:bg-gold/10 cursor-pointer"
+                      className="font-label group relative rounded-full border border-gold/50 px-8 py-3 text-[0.55rem] tracking-[0.35em] text-gold transition-all duration-500 hover:border-gold hover:text-gold-light cursor-pointer"
                       whileHover={{ scale: 1.04 }}
                       whileTap={{ scale: 0.97 }}
                     >
-                      <span className="relative z-10">ENTER THE CELEBRATION</span>
+                      <span className="absolute inset-0 rounded-full opacity-0 transition-all duration-500 group-hover:opacity-100" style={{ boxShadow: "0 0 30px 4px rgba(201,162,39,0.2), inset 0 0 20px 2px rgba(201,162,39,0.05)" }} />
+                      <span className="relative">ENTER THE CELEBRATION</span>
                     </motion.button>
                     <p className="font-body mt-2 text-[0.6rem] tracking-[0.15em] text-charcoal-light/25">
-                      scroll or tap to enter
+                      Tap or Scroll
                     </p>
                   </motion.div>
                 </motion.div>
@@ -268,26 +274,27 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
               >
                 <motion.button
                   onClick={handleOpen}
-                  className="font-label group relative rounded-full border border-gold/60 px-10 py-4 text-xs tracking-[0.35em] text-gold transition-all duration-300 hover:shadow-[0_0_25px_rgba(201,162,39,0.3)] hover:border-gold hover:text-warmwhite hover:bg-gold/10 cursor-pointer"
-                  whileHover={{ scale: 1.05 }}
+                  className="font-label group relative rounded-full border border-gold/50 px-10 py-4 text-xs tracking-[0.35em] text-gold transition-all duration-500 hover:border-gold hover:text-gold-light cursor-pointer"
+                  whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
+                  style={{ boxShadow: "0 0 0 0 rgba(201,162,39,0)" }}
                 >
-                  <span className="relative z-10">OPEN INVITATION</span>
+                  <span className="absolute inset-0 rounded-full opacity-0 transition-all duration-500 group-hover:opacity-100" style={{ boxShadow: "0 0 30px 4px rgba(201,162,39,0.2), inset 0 0 20px 2px rgba(201,162,39,0.05)" }} />
+                  <span className="relative">OPEN INVITATION</span>
                 </motion.button>
                 <p className="font-body mt-3 text-xs tracking-[0.1em] text-charcoal-light/25">
-                  scroll or tap to open · best viewed on a screen
+                  Tap or Scroll
                 </p>
               </motion.div>
             )}
 
-            {/* REVEALED STATE INSTRUCTION */}
             {stage === "opening" && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="font-body mt-6 text-xs tracking-[0.15em] text-charcoal-light/30"
               >
-                preparing your invitation...
+                Preparing Your Invitation...
               </motion.p>
             )}
           </div>
