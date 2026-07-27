@@ -1,0 +1,107 @@
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import ArchDivider from "./ArchDivider";
+
+const photos = [
+  {
+    src: "https://images.pexels.com/photos/33195531/pexels-photo-33195531.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
+    caption: "Traditions held close",
+  },
+  {
+    src: "https://images.pexels.com/photos/30184621/pexels-photo-30184621.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
+    caption: "Beneath the floral mandap",
+  },
+  {
+    src: "https://images.pexels.com/photos/38274753/pexels-photo-38274753.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
+    caption: "Henna, bangles, blessings",
+  },
+  {
+    src: "https://images.pexels.com/photos/12718210/pexels-photo-12718210.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
+    caption: "Rituals passed down generations",
+  },
+  {
+    src: "https://images.pexels.com/photos/30809696/pexels-photo-30809696.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
+    caption: "Two hands, one promise",
+  },
+  {
+    src: "https://images.pexels.com/photos/34431714/pexels-photo-34431714.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
+    caption: "A thousand small flames",
+  },
+];
+
+export default function Gallery() {
+  const [active, setActive] = useState<number | null>(null);
+
+  return (
+    <section id="gallery" className="relative bg-ivory py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="text-center">
+          <ArchDivider label="MOMENTS" />
+          <h2 className="font-display mt-2 text-4xl text-maroon md:text-5xl">A Gallery in the Palace Hall</h2>
+          <p className="font-body mx-auto mt-4 max-w-xl text-sm text-maroon-light/80 md:text-base">
+            A few frames from the journey so far, hung as they'd hang in the Rajwada's own corridors.
+          </p>
+        </div>
+
+        <div className="mt-14 columns-2 gap-6 md:columns-3">
+          {photos.map((p, i) => (
+            <motion.button
+              key={p.src}
+              onClick={() => setActive(i)}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
+              className="group relative mb-6 block w-full break-inside-avoid border-[10px] border-warmwhite bg-warmwhite shadow-[0_15px_35px_-15px_rgba(54,10,19,0.5)] transition-transform duration-300 hover:-translate-y-1 focus-visible:-translate-y-1"
+            >
+              <span className="pointer-events-none absolute inset-0 border border-gold/50" />
+              <img
+                src={p.src}
+                alt={p.caption}
+                loading="lazy"
+                className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <span className="absolute inset-x-0 bottom-0 translate-y-full bg-maroon-dark/80 p-3 text-left transition-transform duration-300 group-hover:translate-y-0">
+                <span className="font-label text-[0.65rem] tracking-[0.2em] text-gold-light">{p.caption}</span>
+              </span>
+            </motion.button>
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {active !== null && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-maroon-dark/90 p-6 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActive(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.35 }}
+              className="relative max-h-[85vh] max-w-2xl border-[12px] border-warmwhite shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="pointer-events-none absolute inset-0 border border-gold" />
+              <img src={photos[active].src} alt={photos[active].caption} className="max-h-[75vh] w-full object-contain" />
+              <div className="bg-warmwhite p-3 text-center">
+                <span className="font-label text-xs tracking-[0.25em] text-maroon">{photos[active].caption}</span>
+              </div>
+              <button
+                onClick={() => setActive(null)}
+                aria-label="Close image"
+                className="absolute -right-3 -top-3 flex h-9 w-9 items-center justify-center rounded-full bg-gold text-warmwhite shadow-lg"
+              >
+                ✕
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
