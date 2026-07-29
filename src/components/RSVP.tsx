@@ -5,10 +5,30 @@ import Divider from "./Divider";
 export default function RSVP() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    data.append("apiKey", import.meta.env.VITE_STATICFORMS_API_KEY);
+    data.append("subject", "Wedding RSVP Submission");
+    const payload = Object.fromEntries(data);
+
+    try {
+      const res = await fetch("https://api.staticforms.dev/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        setSent(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    }
   };
 
   const buttonStyle = open ? {
@@ -74,6 +94,19 @@ export default function RSVP() {
                   <p className="font-body mt-2 text-lg text-charcoal-light/75">
                     Your response has been received. We can't wait to celebrate with you.
                   </p>
+                </motion.div>
+              ) : error ? (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-8 text-center">
+                  <p className="font-display text-2xl text-charcoal">Something went wrong</p>
+                  <p className="font-body mt-2 text-lg text-charcoal-light/75">
+                    Please try again or reach out to us directly.
+                  </p>
+                  <button
+                    onClick={() => setError(false)}
+                    className="font-label mt-4 rounded-full border border-gold px-6 py-2 text-xs tracking-[0.25em] text-gold"
+                  >
+                    TRY AGAIN
+                  </button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
