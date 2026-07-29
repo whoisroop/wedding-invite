@@ -39,7 +39,7 @@ export default function FinalScene() {
           className="mt-12 flex justify-center"
         >
           <img
-            src="/images/logo.png"
+            src="images/logo.png"
             alt="Roop & Dhvani"
             className="h-28 w-auto object-contain md:h-36"
           />

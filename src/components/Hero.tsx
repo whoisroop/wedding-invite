@@ -48,7 +48,7 @@ export default function Hero() {
           className="mb-6"
         >
           <img
-            src="/images/logo.png"
+            src="images/logo.png"
             alt="Roop & Dhvani"
             className="h-36 w-auto object-contain md:h-48"
           />

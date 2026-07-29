@@ -34,7 +34,7 @@ export default function Nav() {
           className="shrink-0"
         >
           <img
-            src="/images/logo.png"
+            src="images/logo.png"
             alt="Roop & Dhvani"
             className="h-10 w-auto object-contain"
           />

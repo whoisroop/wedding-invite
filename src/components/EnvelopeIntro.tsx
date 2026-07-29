@@ -85,7 +85,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                   style={{ animation: "float 3s ease-in-out infinite" }}
                 >
                   <img
-                    src="/images/logo.png"
+                    src="images/logo.png"
                     alt=""
                     className="h-14 w-auto object-contain md:h-16 drop-shadow-lg"
                   />
@@ -187,7 +187,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                         whileTap={stage === "closed" ? { scale: 0.95 } : {}}
                       >
                         <img
-                          src="/images/stamp-seal-transparent.png"
+                          src="images/stamp-seal-transparent.png"
                           alt=""
                           className="h-20 w-auto md:h-24"
                           style={{ filter: "drop-shadow(0 0 10px rgba(201,162,39,0.35))" }}
@@ -217,7 +217,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
 
                   <div className="my-6 flex justify-center">
                     <img
-                      src="/images/logo.png"
+                      src="images/logo.png"
                       alt="Roop & Dhvani"
                       className="h-16 w-auto object-contain md:h-20"
                     />
