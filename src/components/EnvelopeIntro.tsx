@@ -1,29 +1,159 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+type Stage = "closed" | "opening" | "revealed" | "exiting";
+
 interface EnvelopeIntroProps {
   onComplete: () => void;
 }
 
+type GlowParticle = {
+  left: string;
+  top: string;
+  size: number;
+  delay: number;
+  duration: number;
+};
+
+const GLOW_PARTICLES: GlowParticle[] = [
+  { left: "6%", top: "18%", size: 9, delay: 0, duration: 7 },
+  { left: "16%", top: "72%", size: 7, delay: 1.3, duration: 6 },
+  { left: "14%", top: "42%", size: 6, delay: 2.2, duration: 8 },
+  { left: "88%", top: "14%", size: 8, delay: 0.6, duration: 7 },
+  { left: "93%", top: "48%", size: 6, delay: 1.8, duration: 6 },
+  { left: "84%", top: "78%", size: 9, delay: 0.2, duration: 8 },
+  { left: "60%", top: "92%", size: 7, delay: 2.7, duration: 7 },
+  { left: "34%", top: "90%", size: 6, delay: 1.1, duration: 6 },
+  { left: "72%", top: "6%", size: 6, delay: 0.9, duration: 7 },
+  { left: "48%", top: "6%", size: 5, delay: 2.4, duration: 6 },
+  { left: "6%", top: "6%", size: 7, delay: 1.6, duration: 7 },
+  { left: "94%", top: "90%", size: 7, delay: 3, duration: 6 },
+  { left: "28%", top: "12%", size: 5, delay: 0.4, duration: 8 },
+  { left: "8%", top: "58%", size: 6, delay: 1.9, duration: 6 },
+  { left: "40%", top: "86%", size: 5, delay: 0.7, duration: 8 },
+  { left: "56%", top: "16%", size: 5, delay: 3.2, duration: 7 },
+  { left: "26%", top: "62%", size: 5, delay: 2.5, duration: 6 },
+];
+
+const nameGroup = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.55, delayChildren: 0.2 } },
+};
+
+const nameReveal = {
+  hidden: { opacity: 0, y: 34 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.25, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
+const ampReveal = {
+  hidden: { opacity: 0, scale: 0.4, rotate: -12 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: { duration: 0.9, ease: [0.34, 1.56, 0.64, 1] as const },
+  },
+};
+
+type LeafNode = {
+  x: number;
+  y: number;
+  stem: number;
+  side: 1 | -1;
+  splay: number;
+  length: number;
+  opacity: number;
+  sway: number;
+};
+
+const leafNodes: LeafNode[] = [
+  { x: 30.3, y: 255.9, stem: -64.6, side: -1, splay: 42, length: 42, opacity: 0.2, sway: 0 },
+  { x: 42.5, y: 233.4, stem: -60.4, side: 1, splay: 39, length: 33, opacity: 0.15, sway: 0.9 },
+  { x: 54.4, y: 213.3, stem: -57, side: -1, splay: 36, length: 37, opacity: 0.19, sway: 1.7 },
+  { x: 81.6, y: 174.1, stem: -54.4, side: 1, splay: 40, length: 39, opacity: 0.16, sway: 0.5 },
+  { x: 95, y: 154, stem: -55.5, side: -1, splay: 34, length: 30, opacity: 0.13, sway: 2.3 },
+  { x: 109, y: 134.4, stem: -57.2, side: 1, splay: 37, length: 33, opacity: 0.18, sway: 1.2 },
+  { x: 146.9, y: 63.4, stem: -62.5, side: -1, splay: 38, length: 31, opacity: 0.16, sway: 2.8 },
+  { x: 164.2, y: 36, stem: -51.1, side: 1, splay: 35, length: 27, opacity: 0.14, sway: 0.3 },
+  { x: 184.1, y: 17, stem: -36.5, side: -1, splay: 32, length: 24, opacity: 0.17, sway: 1.9 },
+];
+
+function BotanicalCorner({ className }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" className={className} viewBox="-16 -30 292 352" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke">
+        <path d="M12 306C36 214 96 170 134 90C152 52 164 24 206 4" strokeWidth="1.3" />
+        <path d="M58 208c14-26 15-46 6-66" strokeWidth="0.85" strokeOpacity=".7" />
+
+        {leafNodes.map((leaf, i) => (
+          <g key={i} transform={`translate(${leaf.x} ${leaf.y}) rotate(${leaf.stem + leaf.side * leaf.splay})`}>
+            <g className="intro-botanical-leaf" style={{ animationDelay: `${leaf.sway}s` }}>
+              <g transform={`scale(${leaf.length} ${leaf.length * leaf.side})`}>
+                <path d="M0 0 L0.16 -0.008" strokeWidth="0.9" />
+                <path
+                  d="M0.16 -0.008 C0.4 -0.17 0.74 -0.2 1 -0.02 C0.72 0.17 0.38 0.15 0.16 -0.008 Z"
+                  strokeWidth="0.9"
+                  fill="currentColor"
+                  fillOpacity={leaf.opacity}
+                />
+                <path d="M0.16 -0.008 C0.45 -0.03 0.74 -0.04 1 -0.02" strokeWidth="0.7" strokeOpacity=".55" />
+                <path
+                  d="M0.36 -0.022 L0.42 -0.11M0.56 -0.032 L0.64 -0.12M0.34 -0.02 L0.38 0.07M0.55 -0.03 L0.62 0.08"
+                  strokeWidth="0.5"
+                  strokeOpacity=".33"
+                />
+              </g>
+            </g>
+          </g>
+        ))}
+
+        <g strokeWidth="0.85" strokeOpacity=".75">
+          <path d="M103 141 L96 149M108 134 L100 139M113 143 L106 150" />
+          <path d="M150 58 L143 63M156 53 L149 57" />
+        </g>
+      </g>
+      <g fill="currentColor" fillOpacity=".88">
+        <circle cx="103" cy="141" r="3" />
+        <circle cx="108" cy="134" r="2.4" />
+        <circle cx="113" cy="143" r="2.2" />
+        <circle cx="150" cy="58" r="2.6" />
+        <circle cx="156" cy="53" r="2" />
+      </g>
+    </svg>
+  );
+}
+
+function ArrowUpRight() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 19 19 5M8 5h11v11" />
+    </svg>
+  );
+}
+
 export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
-  const [stage, setStage] = useState<"closed" | "opening" | "revealed" | "exiting">("closed");
+  const [stage, setStage] = useState<Stage>("closed");
   const interactedRef = useRef(false);
 
   const handleOpen = () => {
     if (interactedRef.current) return;
     interactedRef.current = true;
     setStage("opening");
-    setTimeout(() => setStage("revealed"), 2200);
-    setTimeout(() => {
+    window.setTimeout(() => setStage("revealed"), 2200);
+    window.setTimeout(() => {
       setStage("exiting");
-      setTimeout(onComplete, 1200);
+      window.setTimeout(onComplete, 1200);
     }, 5500);
   };
 
   const handleEnter = () => {
     if (stage !== "revealed") return;
     setStage("exiting");
-    setTimeout(onComplete, 1200);
+    window.setTimeout(onComplete, 1200);
   };
 
   useEffect(() => {
@@ -32,10 +162,10 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
       if (interactedRef.current) return;
       interactedRef.current = true;
       setStage("opening");
-      setTimeout(() => setStage("revealed"), 2200);
-      setTimeout(() => {
+      window.setTimeout(() => setStage("revealed"), 2200);
+      window.setTimeout(() => {
         setStage("exiting");
-        setTimeout(onComplete, 1200);
+        window.setTimeout(onComplete, 1200);
       }, 5500);
     };
     window.addEventListener("wheel", onScroll, { passive: true, once: true });
@@ -57,243 +187,204 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
     };
   }, [stage]);
 
+  const sealed = stage !== "opening" && stage !== "revealed";
+
   return (
     <AnimatePresence>
       {stage !== "exiting" && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ivory"
+          className="intro-shell fixed inset-0 z-50"
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          {/* Warm ambient glow */}
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <div className="h-[60vh] w-[60vh] rounded-full bg-gold/10 blur-[140px]" />
+          <div className="intro-glow" />
+          <div className="intro-grain" />
+          <BotanicalCorner className="intro-botanical intro-botanical-left" />
+          <BotanicalCorner className="intro-botanical intro-botanical-right" />
+
+          <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+            {GLOW_PARTICLES.map((p, i) => (
+              <span
+                key={i}
+                className="intro-glow-particle"
+                style={{
+                  left: p.left,
+                  top: p.top,
+                  width: p.size,
+                  height: p.size,
+                  animationDelay: `${p.delay}s`,
+                  animationDuration: `${p.duration}s`,
+                }}
+              />
+            ))}
           </div>
 
-          <div className="linen-texture pointer-events-none absolute inset-0 opacity-30" />
-
-          <div className="relative flex flex-col items-center" style={{ perspective: 1500 }}>
-            {/* Floating logo above envelope */}
-            <AnimatePresence>
-              {stage === "closed" && (
+          <div className="intro-scroll flex min-h-full w-full items-center justify-center">
+            <AnimatePresence mode="wait">
+              {sealed ? (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute -top-16 md:-top-20 z-20 pointer-events-none"
-                  style={{ animation: "float 3s ease-in-out infinite" }}
+                  key="sealed"
+                  className="intro-sealed"
+                  initial={{ opacity: 0, scale: 0.96, y: 18 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 1.05, y: -26, filter: "blur(5px)" }}
+                  transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <img
-                    src="images/logo.png"
-                    alt=""
-                    className="h-14 w-auto object-contain md:h-16 drop-shadow-lg"
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <p className="intro-kicker">A gathering beneath the stars</p>
 
-            {/* ENVELOPE */}
-            <motion.div
-              className="relative w-80 md:w-[420px]"
-              animate={
-                stage === "revealed"
-                  ? { y: -80, opacity: 0.8, scale: 0.92 }
-                  : stage === "exiting"
-                    ? { y: -140, opacity: 0, scale: 0.85 }
-                    : {}
-              }
-              transition={{ duration: 0.9, ease: "easeInOut" }}
-              style={{ animation: stage === "closed" ? "envelope-float 3.5s ease-in-out infinite" : undefined }}
-            >
-              {/* Outer gold border frame */}
-              <div className="absolute -inset-3 rounded-sm border border-gold/30" />
-              <div className="absolute -inset-[5px] rounded-sm border border-gold/10" />
-
-              {/* Corner ornaments */}
-              {[
-                "-top-1 -left-1", "-top-1 -right-1",
-                "-bottom-1 -left-1", "-bottom-1 -right-1",
-              ].map((pos, i) => (
-                <span
-                  key={i}
-                  className={`absolute h-4 w-4 border-gold/50 ${pos} ${i < 2 ? "border-t-2 border-l-2" : "border-b-2 border-r-2"} ${i === 1 || i === 3 ? "border-l-0 border-r-2" : ""} ${i === 2 || i === 3 ? "border-t-0 border-b-2" : ""}`}
-                  style={i === 1 ? { borderRight: "2px solid rgba(201,162,39,0.5)", borderTop: "2px solid rgba(201,162,39,0.5)", borderLeft: "none", borderBottom: "none" } : {}}
-                />
-              ))}
-
-              {/* Envelope body */}
-              <div className="relative rounded-sm bg-warmwhite shadow-[0_25px_60px_-20px_rgba(46,46,46,0.3)] h-52 md:h-60">
-                {/* Inner decorative border */}
-                <div className="absolute inset-x-3 inset-y-3 border border-gold/15" />
-
-                {/* Embossed center area */}
-                <div className="absolute inset-x-6 bottom-10 top-16 bg-ivory/40 flex items-center justify-center border border-gold/5">
-                  <span className="font-display text-lg text-charcoal/10 italic tracking-wide">R &amp; D</span>
-                </div>
-
-                {/* Decorative gold line across envelope */}
-                <div className="absolute top-[45%] left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-
-                {/* FLAP */}
-                <motion.div
-                  className="absolute inset-x-0 top-0 origin-top z-20"
-                  style={{
-                    height: "100%",
-                    backfaceVisibility: "hidden",
-                    WebkitBackfaceVisibility: "hidden",
-                  }}
-                  animate={{ rotateX: stage !== "closed" ? 180 : 0 }}
-                    transition={{
-                      duration: 1.2,
-                      ease: [0.72, 0, 0.28, 1],
-                      delay: stage !== "closed" ? 0.7 : 0,
-                    }}
-                >
-                  <svg className="w-full h-full" viewBox="0 0 400 160" preserveAspectRatio="none">
-                    {/* Maroon V fill */}
-                    <path d="M0,0 L400,0 L200,108 Z" fill="#7A1F2A" />
-                    <path d="M0,0 L400,0 L200,108 Z" fill="url(#flapGrad)" opacity="0.15" />
-                    <defs>
-                      <linearGradient id="flapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#9A2F3A" />
-                        <stop offset="100%" stopColor="transparent" />
-                      </linearGradient>
-                    </defs>
-                    {/* Single thin gold V-line — constant 12-unit perpendicular inset from flap edge */}
-                    <path d="M58,18 L200,94 L342,18" fill="none" stroke="#C9A227" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.8" vectorEffect="non-scaling-stroke" />
-                  </svg>
-                </motion.div>
-
-
-
-                {/* WAX SEAL — flex-centering avoids transform conflict with exit */}
-                <AnimatePresence>
-                  {stage === "closed" && (
-                    <motion.div
-                      key="wax-seal"
-                      className="absolute z-30 left-0 right-0 flex justify-center pointer-events-none"
-                      style={{ top: "39%" }}
-                      exit={{ opacity: 0, scale: 0.7, y: 8 }}
-                      transition={{ duration: 0.55, ease: "easeInOut" }}
-                    >
-                      <motion.button
-                        onClick={handleOpen}
-                        disabled={stage !== "closed"}
-                        aria-label="Open invitation"
-                        className="outline-none focus:outline-none focus-visible:outline-none cursor-pointer flex items-center justify-center select-none pointer-events-auto"
-                        style={{ WebkitTapHighlightColor: "transparent" }}
-                        whileHover={stage === "closed" ? { scale: 1.06 } : {}}
-                        whileTap={stage === "closed" ? { scale: 0.95 } : {}}
-                      >
-                        <img
-                          src="images/stamp-seal-transparent.png"
-                          alt=""
-                          className="h-20 w-auto md:h-24"
-                          style={{ filter: "drop-shadow(0 0 10px rgba(201,162,39,0.35))" }}
-                        />
-                      </motion.button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-
-            {/* INVITATION CARD */}
-            <AnimatePresence>
-              {stage === "revealed" && (
-                <motion.div
-                  initial={{ y: 40, opacity: 0, scale: 0.95 }}
-                  animate={{ y: -50, opacity: 1, scale: 1 }}
-                  exit={{ y: -80, opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="absolute top-14 w-72 md:w-[360px] bg-warmwhite shadow-2xl border border-gold/30 p-10 md:p-12 text-center"
-                >
-                  <div className="absolute inset-2 border border-gold/10 pointer-events-none" />
-
-                  <span className="font-label text-[0.5rem] tracking-[0.5em] text-gold">
-                    YOU ARE CORDIALLY INVITED
-                  </span>
-
-                  <div className="my-6 flex justify-center">
-                    <img
-                      src="images/logo.png"
-                      alt="Roop & Dhvani"
-                      className="h-16 w-auto object-contain md:h-20"
-                    />
-                  </div>
-
-                  <h1 className="font-display text-3xl md:text-4xl text-maroon tracking-wide">
-                    <span className="text-gold-shine">R</span>oop
-                    <span className="mx-3 text-gold/40 text-xl">&amp;</span>
-                    <span className="text-gold-shine">D</span>hvani
-                  </h1>
-
-                  <div className="my-4 mx-auto h-px w-16 bg-gold/40" />
-
-                  <p className="font-label text-xs tracking-[0.25em] text-charcoal-light/70">
-                    25 NOVEMBER 2026
-                  </p>
-
-                  <div className="mt-6 pt-4 border-t border-gold/15">
-                    <p className="font-body text-base text-charcoal-light/50 italic">
-                      Together with their families
-                    </p>
-                  </div>
-
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 0.6 }}
-                    className="mt-8"
-                  >
-                    <motion.button
-                      onClick={handleEnter}
-                      className="btn-reveal font-label px-8 py-3 text-[0.55rem] tracking-[0.35em] cursor-pointer"
-                      whileHover={{ scale: 1.04 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <span>ENTER THE CELEBRATION</span>
-                    </motion.button>
-                    <p className="font-body mt-2 text-[0.6rem] tracking-[0.15em] text-charcoal-light/25">
-                      Tap or Scroll
-                    </p>
+                  <motion.div className="intro-names" aria-label="Roop and Dhvani" variants={nameGroup} initial="hidden" animate="visible">
+                    <motion.span className="intro-name-word" variants={nameReveal}>
+                      <motion.span className="intro-name-float" animate={{ y: [0, -5, 0] }} transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}>
+                        <span className="text-gold-shine">R</span>oop
+                      </motion.span>
+                    </motion.span>
+                    <motion.i variants={ampReveal}>&amp;</motion.i>
+                    <motion.span className="intro-name-word" variants={nameReveal}>
+                      <motion.span className="intro-name-float" animate={{ y: [0, 5, 0] }} transition={{ duration: 6.5, delay: 0.9, repeat: Infinity, ease: "easeInOut" }}>
+                        <span className="text-gold-shine">D</span>hvani
+                      </motion.span>
+                    </motion.span>
                   </motion.div>
+
+                  <p className="intro-sealed-date">25 · NOVEMBER · 2026</p>
+
+                  <motion.button
+                    type="button"
+                    className="intro-envelope"
+                    onClick={handleOpen}
+                    whileHover={{ y: -9, rotate: -0.5 }}
+                    whileTap={{ scale: 0.98 }}
+                    aria-label="Open Roop and Dhvani's wedding invitation"
+                  >
+                    <div className="intro-envelope-back" />
+                    <div className="intro-envelope-mark">R&amp;D</div>
+                    <div className="intro-envelope-flap" />
+                    <div className="intro-envelope-front" />
+                    <div className="intro-seal">
+                      <img src="images/stamp-seal-transparent.png" alt="" />
+                    </div>
+                  </motion.button>
+
+                  <motion.button
+                    type="button"
+                    className="intro-open-cta"
+                    onClick={handleOpen}
+                    initial="rest"
+                    animate="rest"
+                    whileHover="hover"
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span className="intro-open-cta-label" data-text="Break the seal">
+                      Break the seal
+                    </span>
+                    <motion.span
+                      className="intro-open-cta-arrow"
+                      variants={{ rest: { x: 0, opacity: 0.75 }, hover: { x: 7, opacity: 1 } }}
+                      transition={{ type: "spring", stiffness: 420, damping: 14 }}
+                    >
+                      &rarr;
+                    </motion.span>
+                    <motion.span
+                      className="intro-open-cta-line"
+                      variants={{ rest: { scaleX: 0 }, hover: { scaleX: 1 } }}
+                      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  </motion.button>
+
+                  <p className="intro-hint">The next chapter unfolds beneath this note.</p>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="open"
+                  className="intro-open"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.45 }}
+                >
+                  <motion.div
+                    className="intro-envelope-shadow"
+                    initial={{ scaleX: 0.55, opacity: 0 }}
+                    animate={{ scaleX: 1, opacity: 1 }}
+                    transition={{ delay: 0.25, duration: 0.8 }}
+                  />
+                  <motion.div
+                    className="intro-open-envelope"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="intro-open-back" />
+                    <div className="intro-open-left" />
+                    <div className="intro-open-right" />
+                    <motion.div
+                      className="intro-open-flap"
+                      initial={{ rotateX: 0 }}
+                      animate={{ rotateX: 180 }}
+                      transition={{ duration: 0.8, ease: [0.34, 1.36, 0.64, 1], delay: 0.06 }}
+                    />
+                  </motion.div>
+
+                  <motion.article
+                    className="intro-paper"
+                    initial={{ y: 190, rotate: 2, opacity: 0.3 }}
+                    animate={{ y: 0, rotate: 0, opacity: 1 }}
+                    transition={{ duration: 1.05, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <motion.div
+                      className="intro-inner"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.82, duration: 0.7 }}
+                    >
+                      <img src="images/logo.png" alt="Roop & Dhvani" className="intro-logo" />
+                      <p className="intro-overline">TOGETHER WITH THEIR FAMILIES</p>
+                      <h1 className="intro-paper-names">
+                        <span className="text-gold-shine">R</span>oop <span className="intro-paper-amp">&amp;</span>{" "}
+                        <span className="text-gold-shine">D</span>hvani
+                      </h1>
+                      <p className="intro-copy">request the pleasure of your company</p>
+
+                      <div className="intro-rule">
+                        <span>*</span>
+                      </div>
+
+                      <p className="intro-date">25 — NOVEMBER — 2026</p>
+                      <p className="intro-place">
+                        Celebration Venue
+                        <span>details to be announced</span>
+                      </p>
+
+                      <motion.div
+                        className="intro-paper-cta"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1, duration: 0.6 }}
+                      >
+<motion.button
+  type="button"
+  className="intro-enter-btn"
+  onClick={handleEnter}
+  whileHover={{ scale: 1.03 }}
+  whileTap={{ scale: 0.97 }}
+>
+  <span className="intro-enter-label">ENTER THE CELEBRATION</span>
+  <span className="intro-enter-arrow">
+    <ArrowUpRight />
+  </span>
+  <span className="intro-enter-underline" />
+</motion.button>
+                        <p className="intro-tap-hint">Tap or Scroll</p>
+                      </motion.div>
+                    </motion.div>
+                  </motion.article>
+
+                  <motion.p className="intro-open-caption" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
+                    An invitation, made with love.
+                  </motion.p>
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {/* CLOSED STATE CTA */}
-            {stage === "closed" && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="mt-10 text-center"
-              >
-                <motion.button
-                  onClick={handleOpen}
-                  className="btn-reveal font-label px-10 py-4 text-xs tracking-[0.35em] cursor-pointer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <span>OPEN INVITATION</span>
-                </motion.button>
-                <p className="font-body mt-3 text-xs tracking-[0.1em] text-charcoal-light/25">
-                  Tap or Scroll
-                </p>
-              </motion.div>
-            )}
-
-            {stage === "opening" && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="font-body mt-6 text-xs tracking-[0.15em] text-charcoal-light/30"
-              >
-                Preparing Your Invitation...
-              </motion.p>
-            )}
           </div>
         </motion.div>
       )}

@@ -11,7 +11,7 @@ export default function RSVP() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.append("apiKey", import.meta.env.VITE_STATICFORMS_API_KEY);
+    data.append("accessKey", import.meta.env.VITE_STATICFORMS_API_KEY);
     data.append("subject", "Wedding RSVP Submission");
     const payload = Object.fromEntries(data);
 
@@ -51,30 +51,90 @@ export default function RSVP() {
         </p>
 
         <div className="relative mx-auto mt-14 max-w-md" style={{ perspective: 1400 }}>
+          {/* ground shadow */}
+          <div aria-hidden className="absolute -bottom-4 left-1/2 h-6 w-4/5 -translate-x-1/2 rounded-[50%] bg-charcoal/15 blur-lg" />
+
           {/* envelope body */}
-          <div className="relative rounded-sm bg-warmwhite shadow-xl">
-            <div className="relative flex h-56 items-end justify-center overflow-hidden p-6">
-              {!open && (
-                <p className="font-body text-2xl text-charcoal/60 italic">Roop &amp; Dhvani request the pleasure...</p>
+          <div className="relative rounded-sm bg-warmwhite shadow-[0_25px_60px_-20px_rgba(46,46,46,0.35)]">
+            {/* inner gold frame */}
+            <div className="pointer-events-none absolute inset-x-3 inset-y-3 z-0 border border-gold/15" />
+            {/* corner ornaments */}
+            {[
+              "top-1 left-1 border-t-2 border-l-2",
+              "top-1 right-1 border-t-2 border-r-2",
+              "bottom-1 left-1 border-b-2 border-l-2",
+              "bottom-1 right-1 border-b-2 border-r-2",
+            ].map((pos, idx) => (
+              <span key={idx} className={`pointer-events-none absolute z-0 h-5 w-5 border-gold/50 ${pos}`} />
+            ))}
+
+            <div className="relative flex h-56 items-center justify-center overflow-hidden p-6 text-center">
+              {open ? (
+                <div className="relative">
+                  <p className="font-body text-lg italic leading-relaxed text-charcoal/70">
+                    He waited this long to ask.
+                    <br />
+                    Don't be late to celebrate.
+                  </p>
+                  <div className="mx-auto my-3 flex items-center gap-3">
+                    <span className="h-px flex-1 bg-gold/40" />
+                    <span className="font-label text-[0.6rem] text-gold">&#10086;</span>
+                    <span className="h-px flex-1 bg-gold/40" />
+                  </div>
+                  <p className="font-display text-2xl text-maroon">
+                    Roop <span className="text-gold">&amp;</span> Dhvani
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <span className="pointer-events-none absolute font-display text-4xl text-maroon/5 italic select-none">
+                    R&amp;D
+                  </span>
+                  <div className="relative self-end pb-2">
+                    <p className="font-body text-2xl text-charcoal/60 italic">We request the pleasure.</p>
+                  </div>
+                </>
               )}
             </div>
 
-            {/* flap */}
-            <motion.div
-              className="absolute inset-x-0 top-0 h-32 origin-top bg-maroon"
-              style={{ clipPath: "polygon(0 0, 100% 0, 50% 85%)" }}
-              animate={{ rotateX: open ? 180 : 0 }}
-              transition={{ duration: 0.9, ease: "easeInOut" }}
+            {/* lower front chevron */}
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-full bg-gradient-to-b from-transparent to-gold/5"
+              style={{ clipPath: "polygon(0 0, 50% 46%, 100% 0, 100% 100%, 0 100%)" }}
             />
 
+            {/* flap */}
+            <motion.div
+              className="absolute inset-x-0 top-0 z-[2] h-32 origin-top"
+              style={{ clipPath: "polygon(0 0, 100% 0, 50% 88%)", backfaceVisibility: "hidden" }}
+              animate={{ rotateX: open ? 180 : 0 }}
+              transition={{ duration: 0.9, ease: [0.32, 0.72, 0.28, 1] }}
+            >
+              <div className="h-full w-full bg-gradient-to-b from-maroon-light to-maroon" />
+              <svg
+                className="absolute inset-0 h-full w-full"
+                viewBox="0 0 400 160"
+                preserveAspectRatio="none"
+                aria-hidden
+              >
+                <path d="M46,0 L200,96 L354,0" fill="none" stroke="#C9A227" strokeWidth="1.5" strokeOpacity="0.55" vectorEffect="non-scaling-stroke" />
+              </svg>
+            </motion.div>
+
+            {/* wax seal OPEN button */}
             {!open && (
               <motion.button
                 onClick={() => setOpen(true)}
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Open the RSVP envelope"
-                className="font-label absolute left-1/2 top-20 z-10 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-gold text-warmwhite text-[0.5rem] tracking-[0.15em] shadow-lg"
+                className="font-label absolute left-1/2 top-20 z-10 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full text-[0.5rem] tracking-[0.15em] text-warmwhite"
+                style={{
+                  background: "radial-gradient(circle at 32% 28%, #E0BE4F 0 10%, #C9A227 45%, #A07E1A 100%)",
+                  boxShadow: "inset 2px 2px 4px rgba(255,255,255,0.3), inset -3px -3px 5px rgba(80,40,4,0.3), 0 6px 12px rgba(160,126,26,0.45)",
+                }}
               >
+                <span className="absolute inset-1.5 rounded-full border border-warmwhite/45" />
                 OPEN
               </motion.button>
             )}

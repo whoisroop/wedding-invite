@@ -3,29 +3,29 @@ import Divider from "./Divider";
 
 const chapters = [
   {
-    year: "2019",
+    year: "2020",
     title: "A Serendipitous Meeting",
-    text: "What began as a passing acquaintance in a crowded room soon became the only conversation either of them wanted to have. Strangers, then friends — and then, something more.",
+    text: "A single “hi” through the blur of online classes became the only conversation that ever mattered. Strangers on a screen, then friends in stolen moments, then everything.",
   },
   {
-    year: "2021",
+    year: "2022",
     title: "Falling in Step",
-    text: "Late night calls turned into morning flights. Cities between them became bridges, not barriers. Every goodbye carried the quiet certainty of a future together.",
+    text: "Their first dance was never about the steps. It was about two hearts finding the same beat. When the song ended, the rhythm stayed.",
   },
   {
     year: "2023",
     title: "A Question of Forever",
-    text: "As the sun set over the horizon, one question — simple, terrifying, and absolutely certain — changed everything. The answer was yes, before the words had even left.",
+    text: "The question was simple, quiet, and brave. “Will you be my girlfriend?” The answer already lived in her eyes before the words reached the air.",
   },
   {
-    year: "2024",
+    year: "2026",
     title: "Two Worlds, One Family",
-    text: "Families met over shared laughter and borrowed stories. Traditions intertwined, and what began as two became the beginning of something far greater.",
+    text: "In March, a ring said everything. Two families gathered around shared laughter and borrowed traditions, becoming one story.",
   },
   {
     year: "2026",
     title: "The Celebration Begins",
-    text: "And now, on the 25th of November, every road leads to one place. A ceremony. A celebration. A lifetime.",
+    text: "And now, on the 25th of November, every road they have walked leads to this place. A ceremony. A celebration. A lifetime, all because of one “hi.”",
   },
 ];
 
@@ -47,7 +47,7 @@ export default function OurStory() {
           <div className="space-y-16 md:space-y-20">
             {chapters.map((c, i) => (
               <motion.div
-                key={c.year}
+                key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}

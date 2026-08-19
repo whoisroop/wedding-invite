@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EnvelopeIntro from "./components/EnvelopeIntro";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
@@ -13,6 +13,11 @@ import FinalScene from "./components/FinalScene";
 
 export default function App() {
   const [invitationOpened, setInvitationOpened] = useState(false);
+
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="relative min-h-screen bg-ivory">

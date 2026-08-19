@@ -5,14 +5,14 @@ const families = [
   {
     side: "The Groom",
     name: "Family of Roop",
-    parents: "Mr. & Mrs. Sharma",
-    members: ["Roop — Groom"],
+    parents: "Mr. & Mrs. Lala",
+    members: ["Abhijit — Father", "Ruby — Mother", "Neha — Sister", "Son of Ruby Lala"],
   },
   {
     side: "The Bride",
     name: "Family of Dhvani",
-    parents: "Mr. & Mrs. Patel",
-    members: ["Dhvani — Bride"],
+    parents: "Mr. & Mrs. Shah",
+    members: ["Atul — Father", "Sonal — Mother", "Manan — Brother", "Daughter of Reena Shah"],
   },
 ];
 

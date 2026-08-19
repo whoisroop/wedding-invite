@@ -4,28 +4,28 @@ import Divider from "./Divider";
 
 const photos = [
   {
-    src: "https://images.pexels.com/photos/33195531/pexels-photo-33195531.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
-    caption: "Traditions held close",
+    src: "https://drive.google.com/thumbnail?id=1bEBCPVi9wRz17B0Q2SfRE657yc9o36UQ&sz=w1200",
+    caption: "Traditions, held close",
   },
   {
-    src: "https://images.pexels.com/photos/30184621/pexels-photo-30184621.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
-    caption: "Beneath the floral mandap",
+    src: "https://drive.google.com/thumbnail?id=1UqkTzycANdo8KKL2WvnPFGP6DbAfu6ME&sz=w1200",
+    caption: "The dance dip",
   },
   {
-    src: "https://images.pexels.com/photos/38274753/pexels-photo-38274753.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
-    caption: "Blessings and celebration",
+    src: "https://drive.google.com/thumbnail?id=1PQmy29-2wTs1leJMheiJQTkdV-piVnOe&sz=w1200",
+    caption: "The ring, the question, the yes",
   },
   {
-    src: "https://images.pexels.com/photos/12718210/pexels-photo-12718210.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
-    caption: "Rituals passed down generations",
+    src: "https://drive.google.com/thumbnail?id=1voPlnCsVHdvXAf2K8xWAjHmDVstyghbc&sz=w1200",
+    caption: "Two souls, one frame",
   },
   {
-    src: "https://images.pexels.com/photos/30809696/pexels-photo-30809696.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
-    caption: "Two hands, one promise",
+    src: "https://drive.google.com/thumbnail?id=1MjS9s7WBibGD8iVsFSrnyZzpd12rpX_M&sz=w1200",
+    caption: "Hand in hand, always",
   },
   {
-    src: "https://images.pexels.com/photos/34431714/pexels-photo-34431714.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900",
-    caption: "A thousand small flames",
+    src: "https://drive.google.com/thumbnail?id=1CDMg0UdxWDYwUoPUHdVceyiNbWjvCjPz&sz=w1200",
+    caption: "Mehendi, drawn in love",
   },
 ];
 

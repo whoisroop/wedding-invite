@@ -11,11 +11,11 @@ interface EventItem {
 
 const events: EventItem[] = [
   {
-    name: "Welcome Dinner",
-    time: "7:00 PM",
+    name: "Bridal Shower",
+    time: "4:00 PM",
     label: "24 NOVEMBER",
-    description: "An intimate evening of warmth and welcome. Good food, familiar faces, and the first toast of the weekend.",
-    accent: "from-gold/40 to-gold/10",
+    description: "An afternoon of joy in Dhvani's honor — laughter, games, and joyful anticipation as close friends shower the bride with love.",
+    accent: "from-maroon-light/40 to-gold/10",
   },
   {
     name: "The Wedding Ceremony",
@@ -42,7 +42,7 @@ export default function Events() {
           <Divider label="THE CELEBRATIONS" light />
           <h2 className="font-display mt-6 text-4xl text-warmwhite md:text-5xl">A Weekend to Remember</h2>
           <p className="font-body mx-auto mt-4 max-w-xl text-lg text-warmwhite/70 md:text-xl">
-            Three occasions, one celebration — each one a thread in the tapestry of this weekend.
+            Three occasions, one celebration — a shower of love, a sacred ceremony, and a night to remember.
           </p>
         </div>
 
