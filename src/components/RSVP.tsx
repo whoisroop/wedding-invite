@@ -212,13 +212,13 @@ export default function RSVP() {
                   </div>
                   <div>
                     <label htmlFor="message" className="font-label text-[0.6rem] tracking-[0.25em] text-gold">
-                      Say something future-us will laugh about.
+                      MESSAGE FOR THE COUPLE
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       rows={3}
-                      placeholder="Your blessings, in a few words"
+                      placeholder="Say something future-us will laugh about."
                       className="font-body mt-2 w-full resize-none border-b border-charcoal/20 bg-transparent py-2 text-charcoal outline-none focus:border-gold text-lg"
                     />
                   </div>

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Divider from "./Divider";
 
-const address = "Venue details to be announced";
+const address = "You are invited";
 const mapLocation = "Adajan, Surat, Gujarat";
 const mapsQuery = encodeURIComponent(mapLocation);
 

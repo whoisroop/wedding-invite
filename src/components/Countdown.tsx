@@ -49,7 +49,7 @@ export default function Countdown() {
           transition={{ delay: 0.15 }}
           className="font-display mt-3 text-3xl text-charcoal md:text-4xl"
         >
-          {finished ? "Forever Has Begun" : "Counting Down to Forever"}
+          {finished ? "Forever Has Begun" : "The Final Countdown Begins"}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
