@@ -351,8 +351,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
 
                       <p className="intro-date">4 — DECEMBER — 2026</p>
                       <p className="intro-place">
-                        Celebration Venue
-                        <span>details to be announced</span>
+                        <span>You are invited.</span>
                       </p>
 
                       <motion.div
