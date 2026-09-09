@@ -6,13 +6,13 @@ const families = [
     side: "The Groom",
     name: "Family of Roop",
     parents: "Abhijit & Ruby Lala",
-    members: ["Neha (Sister)", "Son of Ruby Lala"],
+    members: ["Neha (Sister)"],
   },
   {
     side: "The Bride",
     name: "Family of Dhvani",
     parents: "Atul & Sonal Shah",
-    members: ["Manan (Brother)", "Daughter of Reena Shah"],
+    members: ["Manan (Brother)"],
   },
 ];
 

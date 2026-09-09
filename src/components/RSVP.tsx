@@ -72,7 +72,7 @@ export default function RSVP() {
               {open ? (
                 <div className="relative">
                   <p className="font-body text-lg italic leading-relaxed text-charcoal/70">
-                    Say something future-us will laugh about.
+                    He waited this long to ask. Don't be late to celebrate.
                   </p>
                   <div className="mx-auto my-3 flex items-center gap-3">
                     <span className="h-px flex-1 bg-gold/40" />
@@ -212,7 +212,7 @@ export default function RSVP() {
                   </div>
                   <div>
                     <label htmlFor="message" className="font-label text-[0.6rem] tracking-[0.25em] text-gold">
-                      MESSAGE FOR THE COUPLE
+                      Say something future-us will laugh about.
                     </label>
                     <textarea
                       id="message"
