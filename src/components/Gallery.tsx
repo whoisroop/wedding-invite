@@ -5,27 +5,27 @@ import Divider from "./Divider";
 const photos = [
   {
     src: "https://drive.google.com/thumbnail?id=1bEBCPVi9wRz17B0Q2SfRE657yc9o36UQ&sz=w1200",
-    caption: "Traditions, held close",
+    caption: "Sun Maahi, Sun ve Ranjha",
   },
   {
     src: "https://drive.google.com/thumbnail?id=1UqkTzycANdo8KKL2WvnPFGP6DbAfu6ME&sz=w1200",
-    caption: "The dance dip",
+    caption: "Just Like in the Movies",
   },
   {
     src: "https://drive.google.com/thumbnail?id=1PQmy29-2wTs1leJMheiJQTkdV-piVnOe&sz=w1200",
-    caption: "The ring, the question, the yes",
+    caption: "She Said Yes!",
   },
   {
     src: "https://drive.google.com/thumbnail?id=1voPlnCsVHdvXAf2K8xWAjHmDVstyghbc&sz=w1200",
-    caption: "Two souls, one frame",
+    caption: "Eyes Don't Lie",
   },
   {
     src: "https://drive.google.com/thumbnail?id=1MjS9s7WBibGD8iVsFSrnyZzpd12rpX_M&sz=w1200",
-    caption: "Hand in hand, always",
+    caption: "Make You Mine",
   },
   {
     src: "https://drive.google.com/thumbnail?id=1CDMg0UdxWDYwUoPUHdVceyiNbWjvCjPz&sz=w1200",
-    caption: "Mehendi, drawn in love",
+    caption: "Let Mehendi Do Its Magic",
   },
 ];
 

@@ -60,7 +60,7 @@ export default function FinalScene() {
           transition={{ delay: 0.8, duration: 1 }}
           className="font-body text-base tracking-[0.15em] text-warmwhite/60"
         >
-          ROOP &amp; DHVANI · 25 NOVEMBER 2026
+          ROOP &amp; DHVANI · 4 DECEMBER 2026
         </motion.p>
         <p className="font-body mt-3 text-sm tracking-[0.2em] text-warmwhite/30">
           made with love, for those we hold dear

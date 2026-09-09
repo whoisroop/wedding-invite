@@ -47,7 +47,7 @@ export default function RSVP() {
         <Divider label="RSVP" />
         <h2 className="font-display mt-6 text-4xl text-charcoal md:text-5xl">Seal Your Attendance</h2>
         <p className="font-body mx-auto mt-4 max-w-md text-lg text-charcoal-light/80 md:text-xl">
-          Kindly respond by November 10th, 2026 — we look forward to celebrating with you.
+          Kindly respond by November 25th, 2026 — we look forward to celebrating with you.
         </p>
 
         <div className="relative mx-auto mt-14 max-w-md" style={{ perspective: 1400 }}>
@@ -72,9 +72,7 @@ export default function RSVP() {
               {open ? (
                 <div className="relative">
                   <p className="font-body text-lg italic leading-relaxed text-charcoal/70">
-                    He waited this long to ask.
-                    <br />
-                    Don't be late to celebrate.
+                    Say something future-us will laugh about.
                   </p>
                   <div className="mx-auto my-3 flex items-center gap-3">
                     <span className="h-px flex-1 bg-gold/40" />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const WEDDING_DATE = new Date("2026-11-25T00:00:00+05:30").getTime();
+const WEDDING_DATE = new Date("2026-12-04T00:00:00+05:30").getTime();
 
 function getRemaining() {
   const diff = Math.max(0, WEDDING_DATE - Date.now());
@@ -51,6 +51,15 @@ export default function Countdown() {
         >
           {finished ? "Forever Has Begun" : "Counting Down to Forever"}
         </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.25 }}
+          className="font-body mt-3 text-base italic text-charcoal-light/70"
+        >
+          Every day brings us a little closer to a moment we've been waiting for.
+        </motion.p>
 
         {finished ? (
           <motion.div
@@ -98,7 +107,7 @@ export default function Countdown() {
           transition={{ delay: 0.5 }}
           className="font-body mt-10 text-base text-charcoal-light/70"
         >
-          25 November 2026
+          4 December 2026
         </motion.p>
       </div>
     </section>

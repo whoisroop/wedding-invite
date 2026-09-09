@@ -6,6 +6,7 @@ interface EventItem {
   time: string;
   label: string;
   description: string;
+  details?: string[];
   accent: string;
 }
 
@@ -13,22 +14,23 @@ const events: EventItem[] = [
   {
     name: "Bridal Shower",
     time: "4:00 PM",
-    label: "24 NOVEMBER",
-    description: "An afternoon of joy in Dhvani's honor — laughter, games, and joyful anticipation as close friends shower the bride with love.",
+    label: "3 DECEMBER",
+    description: "An evening filled with laughter, games, music, and all the love as we celebrate the bride-to-be.",
+    details: ["Theme: Summer in Spain", "Vibe: Sooraj Ki Baahon Mein", "Color palette: Pastels"],
     accent: "from-maroon-light/40 to-gold/10",
   },
   {
-    name: "The Wedding Ceremony",
+    name: "The Wedding",
     time: "10:00 AM",
-    label: "25 NOVEMBER",
-    description: "The sacred moment — vows exchanged, garlands bestowed, and two souls united in the presence of those they love most.",
+    label: "4 DECEMBER",
+    description: "A beautiful beginning — as they make it official in the presence of those they love most.",
     accent: "from-emerald/40 to-emerald/10",
   },
   {
     name: "Reception",
     time: "7:30 PM",
-    label: "25 NOVEMBER",
-    description: "A night of celebration — dinner, dancing, laughter, and memories that will echo through the years.",
+    label: "4 DECEMBER",
+    description: "An evening of celebration — good food, warm conversations, laughter, and memories to cherish for years to come.",
     accent: "from-gold/40 to-emerald/10",
   },
 ];
@@ -42,7 +44,7 @@ export default function Events() {
           <Divider label="THE CELEBRATIONS" light />
           <h2 className="font-display mt-6 text-4xl text-warmwhite md:text-5xl">A Weekend to Remember</h2>
           <p className="font-body mx-auto mt-4 max-w-xl text-lg text-warmwhite/70 md:text-xl">
-            Three occasions, one celebration — a shower of love, a sacred ceremony, and a night to remember.
+            Three occasions, one celebration — a shower of love, a beautiful beginning, and an evening to treasure.
           </p>
         </div>
 
@@ -62,6 +64,15 @@ export default function Events() {
                 <h3 className="font-display mt-2 text-2xl text-charcoal md:text-3xl">{event.name}</h3>
                 <div className="my-4 h-px w-12 bg-gold/40" />
                 <p className="font-body text-base text-charcoal-light/80">{event.description}</p>
+                {event.details && (
+                  <div className="mt-4 space-y-1 border-t border-gold/15 pt-4">
+                    {event.details.map((d) => (
+                      <p key={d} className="font-label text-[0.55rem] tracking-[0.2em] text-charcoal-light/70">
+                        {d.toUpperCase()}
+                      </p>
+                    ))}
+                  </div>
+                )}
                 <div className="mt-6 flex items-center gap-2 text-gold">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <circle cx="12" cy="12" r="10" />

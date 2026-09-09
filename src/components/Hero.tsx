@@ -78,7 +78,7 @@ export default function Hero() {
           transition={{ delay: 1.5, duration: 0.8 }}
           className="font-label text-sm tracking-[0.3em] text-warmwhite/80"
         >
-          25 · NOVEMBER · 2026
+          4 · DECEMBER · 2026
         </motion.p>
 
         <motion.div

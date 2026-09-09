@@ -246,7 +246,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                     </motion.span>
                   </motion.div>
 
-                  <p className="intro-sealed-date">25 · NOVEMBER · 2026</p>
+                  <p className="intro-sealed-date">4 · DECEMBER · 2026</p>
 
                   <motion.button
                     type="button"
@@ -349,7 +349,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                         <span>*</span>
                       </div>
 
-                      <p className="intro-date">25 — NOVEMBER — 2026</p>
+                      <p className="intro-date">4 — DECEMBER — 2026</p>
                       <p className="intro-place">
                         Celebration Venue
                         <span>details to be announced</span>
