@@ -7,7 +7,7 @@ interface EventItem {
   label: string;
   description: string;
   details?: string[];
-  accent?: string;
+  script?: string;
   footnote?: string;
   accent: string;
 }
@@ -19,7 +19,7 @@ const events: EventItem[] = [
     label: "3 DECEMBER",
     description: "An evening filled with laughter, games, music, and all the love as we celebrate the bride-to-be.",
     details: ["Theme: Sunshine and Spritz"],
-    accent: "For a very special few ✨",
+    script: "For a very special few ✨",
     footnote: "Our bridesmaids will reach out with where to be and what to wear. 💌",
     accent: "from-maroon-light/40 to-gold/10",
   },
@@ -60,8 +60,8 @@ export default function Events() {
                 <span className="font-label text-[0.55rem] tracking-[0.35em] text-gold">{event.label}</span>
                 <h3 className="font-display mt-2 text-2xl text-charcoal md:text-3xl">{event.name}</h3>
                 <div className="my-4 h-px w-12 bg-gold/40" />
-                {event.accent && (
-                  <p className="font-script text-3xl leading-tight text-maroon">{event.accent}</p>
+                {event.script && (
+                  <p className="font-script text-3xl leading-tight text-maroon">{event.script}</p>
                 )}
                 <p className="font-body text-base text-charcoal-light/80">{event.description}</p>
                 {event.details && (
