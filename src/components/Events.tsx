@@ -71,7 +71,7 @@ export default function Events() {
                 {event.notes && (
                   <div className="mt-3 space-y-1.5">
                     {event.notes.map((n) => (
-                      <p key={n} className="font-body text-base italic leading-snug text-charcoal-light/80">
+                      <p key={n} className="font-label text-[0.62rem] leading-relaxed tracking-[0.14em] text-charcoal-light/80">
                         {n}
                       </p>
                     ))}
