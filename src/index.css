@@ -214,14 +214,12 @@ body {
   overflow: visible;
   text-shadow: 0 3px 20px rgba(0, 0, 0, 0.14);
 }
-.intro-names i {
+.intro-names-amp {
   display: inline-block;
   padding: 0 0.08em;
   overflow: visible;
-  color: var(--color-gold-light);
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: 0.55em;
+  color: rgb(201 162 39 / 0.6);
+  font-size: 0.5em;
   font-weight: 400;
   line-height: 1;
 }
@@ -487,10 +485,9 @@ body {
 .intro-paper-names .intro-paper-amp {
   display: inline-block;
   padding: 0 0.1em;
-  color: var(--color-gold);
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: 0.62em;
+  color: rgb(201 162 39 / 0.6);
+  font-size: 0.55em;
+  font-weight: 400;
   line-height: 1;
   overflow: visible;
 }

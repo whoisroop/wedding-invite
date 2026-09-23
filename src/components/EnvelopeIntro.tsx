@@ -238,7 +238,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                         <span className="text-gold-shine">R</span>oop
                       </motion.span>
                     </motion.span>
-                    <motion.i variants={ampReveal}>&amp;</motion.i>
+                    <motion.span className="intro-names-amp" variants={ampReveal}>&amp;</motion.span>
                     <motion.span className="intro-name-word" variants={nameReveal}>
                       <motion.span className="intro-name-float" animate={{ y: [0, 5, 0] }} transition={{ duration: 6.5, delay: 0.9, repeat: Infinity, ease: "easeInOut" }}>
                         <span className="text-gold-shine">D</span>hvani
@@ -343,7 +343,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                         <span className="text-gold-shine">R</span>oop <span className="intro-paper-amp">&amp;</span>{" "}
                         <span className="text-gold-shine">D</span>hvani
                       </h1>
-                      <p className="intro-copy">request the pleasure of your company</p>
+                      <p className="intro-copy">Request the pleasure of your company</p>
 
                       <div className="intro-rule">
                         <span>*</span>
@@ -351,7 +351,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
 
                       <p className="intro-date">4 — DECEMBER — 2026</p>
                       <p className="intro-place">
-                        <span className="text-gold-shine">You are invited.</span>
+                        <span className="text-gold-shine">Join us as we say forever.</span>
                       </p>
 
                       <motion.div

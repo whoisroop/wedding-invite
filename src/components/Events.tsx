@@ -7,6 +7,7 @@ interface EventItem {
   label: string;
   description: string;
   details?: string[];
+  notes?: string[];
   accent: string;
 }
 
@@ -16,11 +17,12 @@ const events: EventItem[] = [
     time: "4:00 PM",
     label: "3 DECEMBER",
     description: "An evening filled with laughter, games, music, and all the love as we celebrate the bride-to-be.",
-    details: ["Theme: Sunshine and Spritz", "For a very special few. ✨", "Our bridesmaids will reach out with all the details — where to be & what to wear. 💌"],
+    details: ["Theme: Sunshine and Spritz"],
+    notes: ["For a very special few. ✨", "Our bridesmaids will reach out with all the details — where to be & what to wear. 💌"],
     accent: "from-maroon-light/40 to-gold/10",
   },
   {
-    name: "Reception",
+    name: "Wedding Dinner",
     time: "7:30 PM",
     label: "4 DECEMBER",
     description: "An evening of celebration — good food, warm conversations, laughter, and memories to cherish for years to come.",
@@ -62,6 +64,15 @@ export default function Events() {
                     {event.details.map((d) => (
                       <p key={d} className="font-label text-[0.55rem] tracking-[0.2em] text-charcoal-light/70">
                         {d.toUpperCase()}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                {event.notes && (
+                  <div className="mt-3 space-y-1.5">
+                    {event.notes.map((n) => (
+                      <p key={n} className="font-body text-base italic leading-snug text-charcoal-light/80">
+                        {n}
                       </p>
                     ))}
                   </div>
