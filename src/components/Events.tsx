@@ -16,15 +16,8 @@ const events: EventItem[] = [
     time: "4:00 PM",
     label: "3 DECEMBER",
     description: "An evening filled with laughter, games, music, and all the love as we celebrate the bride-to-be.",
-    details: ["Theme: Summer in Spain", "Vibe: Sooraj Ki Baahon Mein", "Color palette: Pastels"],
+    details: ["Theme: Sunshine and Spritz", "For a very special few. ✨", "Our bridesmaids will reach out with all the details — where to be & what to wear. 💌"],
     accent: "from-maroon-light/40 to-gold/10",
-  },
-  {
-    name: "The Wedding",
-    time: "10:00 AM",
-    label: "4 DECEMBER",
-    description: "A beautiful beginning — as they make it official in the presence of those they love most.",
-    accent: "from-emerald/40 to-emerald/10",
   },
   {
     name: "Reception",
@@ -42,13 +35,13 @@ export default function Events() {
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="text-center">
           <Divider label="THE CELEBRATIONS" light />
-          <h2 className="font-display mt-6 text-4xl text-warmwhite md:text-5xl">A Weekend to Remember</h2>
+          <h2 className="font-display mt-6 text-4xl text-warmwhite md:text-5xl">Moments to Cherish</h2>
           <p className="font-body mx-auto mt-4 max-w-xl text-lg text-warmwhite/70 md:text-xl">
-            Three occasions, one celebration — a shower of love, a beautiful beginning, and an evening to treasure.
+            Two occasions, one celebration — a shower of love and an evening to treasure.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="mx-auto mt-16 grid max-w-4xl gap-8 md:grid-cols-2">
           {events.map((event, i) => (
             <motion.div
               key={event.name}

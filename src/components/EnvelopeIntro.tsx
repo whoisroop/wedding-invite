@@ -338,7 +338,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
                       transition={{ delay: 0.82, duration: 0.7 }}
                     >
                       <img src="images/logo.png" alt="Roop & Dhvani" className="intro-logo" />
-                      <p className="intro-overline">TOGETHER WITH THEIR FAMILIES</p>
+                      <p className="intro-overline">INVITING YOU TO JOIN US FOR OUR WEDDING CELEBRATION</p>
                       <h1 className="intro-paper-names">
                         <span className="text-gold-shine">R</span>oop <span className="intro-paper-amp">&amp;</span>{" "}
                         <span className="text-gold-shine">D</span>hvani
@@ -351,7 +351,7 @@ export default function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
 
                       <p className="intro-date">4 — DECEMBER — 2026</p>
                       <p className="intro-place">
-                        <span>You are invited.</span>
+                        <span className="text-gold-shine">You are invited.</span>
                       </p>
 
                       <motion.div

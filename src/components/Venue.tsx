@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Divider from "./Divider";
 
-const address = "You are invited";
+const address = "Venue details to be announced";
 const mapLocation = "Adajan, Surat, Gujarat";
 const mapsQuery = encodeURIComponent(mapLocation);
 
@@ -25,13 +25,14 @@ export default function Venue() {
           <div className="relative bg-warmwhite px-6 py-10 shadow-xl md:px-14 md:py-14">
             <div className="relative z-10 grid gap-10 md:grid-cols-2 md:items-center">
               <div>
-                <span className="font-label text-xs tracking-[0.4em] text-gold">CEREMONY &amp; RECEPTION</span>
+                <span className="font-label text-xs tracking-[0.4em] text-gold">WEDDING DINNER</span>
                 <h3 className="font-display mt-2 text-3xl text-charcoal md:text-4xl">Celebration Venue</h3>
                 <p className="font-body mt-3 text-lg leading-relaxed text-charcoal-light/80">
                   {address}
                 </p>
                 <p className="font-body mt-4 text-base text-charcoal-light/70">
-                  Further details including the venue name, address, and directions will be shared with invited guests closer to the date.
+                  Further details, including the venue name, address, and directions, will appear here closer to the date.
+                  But rest assured — it’s happening in Surat!
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
@@ -43,11 +44,6 @@ export default function Venue() {
                   >
                     VIEW ON MAP
                   </a>
-                </div>
-
-                <div className="mt-8 border-t border-gold/30 pt-6">
-                  <span className="font-label text-[0.6rem] tracking-[0.3em] text-gold">WEDDING COORDINATOR</span>
-                  <p className="font-body mt-2 text-base text-charcoal-light/80">Details to be shared</p>
                 </div>
               </div>
 
