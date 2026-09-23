@@ -20,7 +20,7 @@ const events: EventItem[] = [
     description: "An evening filled with laughter, games, music, and all the love as we celebrate the bride-to-be.",
     details: ["Theme: Sunshine and Spritz"],
     accent: "For a very special few ✨",
-    footnote: "Our bridesmaids will reach out with all the details — where to be & what to wear. 💌",
+    footnote: "Our bridesmaids will reach out with where to be and what to wear. 💌",
     accent: "from-maroon-light/40 to-gold/10",
   },
   {
@@ -41,7 +41,7 @@ export default function Events() {
           <Divider label="THE CELEBRATIONS" light />
           <h2 className="font-display mt-6 text-4xl text-warmwhite md:text-5xl">Moments to Cherish</h2>
           <p className="font-body mx-auto mt-4 max-w-xl text-lg text-warmwhite/70 md:text-xl">
-            Two occasions, one celebration — a shower of love and an evening to treasure.
+            Two occasions, one celebration. A shower of love and an evening to treasure.
           </p>
         </div>
 

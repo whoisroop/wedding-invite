@@ -32,7 +32,7 @@ export default function Venue() {
                 </p>
                 <p className="font-body mt-4 text-base text-charcoal-light/70">
                   Further details, including the venue name, address, and directions, will appear here closer to the date.
-                  But rest assured — it’s happening in Surat!
+                  But rest assured, it’s happening in Surat!
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
