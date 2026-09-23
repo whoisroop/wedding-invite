@@ -61,7 +61,7 @@ export default function Events() {
                 <h3 className="font-display mt-2 text-2xl text-charcoal md:text-3xl">{event.name}</h3>
                 <div className="my-4 h-px w-12 bg-gold/40" />
                 {event.script && (
-                  <p className="font-script text-3xl leading-tight text-maroon">{event.script}</p>
+                  <p className="font-script text-2xl leading-tight text-gold-dark">{event.script}</p>
                 )}
                 <p className="font-body text-base text-charcoal-light/80">{event.description}</p>
                 {event.details && (
