@@ -7,7 +7,8 @@ interface EventItem {
   label: string;
   description: string;
   details?: string[];
-  notes?: string[];
+  accent?: string;
+  footnote?: string;
   accent: string;
 }
 
@@ -18,7 +19,8 @@ const events: EventItem[] = [
     label: "3 DECEMBER",
     description: "An evening filled with laughter, games, music, and all the love as we celebrate the bride-to-be.",
     details: ["Theme: Sunshine and Spritz"],
-    notes: ["For a very special few. ✨", "Our bridesmaids will reach out with all the details — where to be & what to wear. 💌"],
+    accent: "For a very special few ✨",
+    footnote: "Our bridesmaids will reach out with all the details — where to be & what to wear. 💌",
     accent: "from-maroon-light/40 to-gold/10",
   },
   {
@@ -58,6 +60,9 @@ export default function Events() {
                 <span className="font-label text-[0.55rem] tracking-[0.35em] text-gold">{event.label}</span>
                 <h3 className="font-display mt-2 text-2xl text-charcoal md:text-3xl">{event.name}</h3>
                 <div className="my-4 h-px w-12 bg-gold/40" />
+                {event.accent && (
+                  <p className="font-script text-3xl leading-tight text-maroon">{event.accent}</p>
+                )}
                 <p className="font-body text-base text-charcoal-light/80">{event.description}</p>
                 {event.details && (
                   <div className="mt-4 space-y-1 border-t border-gold/15 pt-4">
@@ -68,14 +73,10 @@ export default function Events() {
                     ))}
                   </div>
                 )}
-                {event.notes && (
-                  <div className="mt-3 space-y-1.5">
-                    {event.notes.map((n) => (
-                      <p key={n} className="font-body text-base leading-relaxed text-charcoal-light/80">
-                        {n}
-                      </p>
-                    ))}
-                  </div>
+                {event.footnote && (
+                  <p className="font-label mt-4 border-t border-gold/15 pt-4 text-[0.6rem] leading-relaxed tracking-[0.12em] text-charcoal-light/60">
+                    {event.footnote}
+                  </p>
                 )}
                 <div className="mt-6 flex items-center gap-2 text-gold">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

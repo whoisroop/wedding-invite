@@ -86,6 +86,7 @@ body {
 .font-display { font-family: var(--font-display); }
 .font-body { font-family: var(--font-body); }
 .font-label { font-family: var(--font-label); }
+.font-script { font-family: "Great Vibes", cursive; }
 
 /* ================= Reveal Intro — dark garden ================= */
 .intro-shell {
